@@ -147,20 +147,20 @@ function EditPost() {
       {Restrict ? (
         <div className="text-center mt-5">
           <h2>
-            <i class="bi bi-fire text-danger"></i>&nbsp;Access Restricted
+            <i className="bi bi-fire text-danger"></i>&nbsp;Access Restricted
           </h2>
         </div>
       ) : (
         <div className="container">
-          <div class="card m-5">
-            <div class="row g-0">
-              <div class="col-md-8">
+          <div className="card m-5">
+            <div className="row g-0">
+              <div className="col-md-8">
                 <form
                   onSubmit={handleSubmit}
-                  class="d-flex flex-column gap-2 m-5"
+                  className="d-flex flex-column gap-2 m-5"
                 >
-                  <div class="mb-3">
-                    <label for="fileLoader" class="form-label fw-semibold">
+                  <div className="mb-3">
+                    <label for="fileLoader" className="form-label fw-semibold">
                       Blog Poster
                     </label>
                     <input
@@ -179,8 +179,8 @@ function EditPost() {
                     />
                   </div>
 
-                  <div class="mb-3">
-                    <label for="title" class="form-label fw-semibold">
+                  <div className="mb-3">
+                    <label for="title" className="form-label fw-semibold">
                       Tittle
                     </label>
                     <input
@@ -194,14 +194,14 @@ function EditPost() {
                     />
                   </div>
 
-                  <div class="mb-3">
-                    <label for="category" class="form-label fw-semibold">
+                  <div className="mb-3">
+                    <label for="category" className="form-label fw-semibold">
                       Category
                     </label>
                     <select
                       id="category"
                       required
-                      class="form-select"
+                      className="form-select"
                       value={Category}
                       onChange={(event) => {
                         setCategory(event.target.value);
@@ -217,14 +217,14 @@ function EditPost() {
                     </select>
                   </div>
 
-                  <div class="mb-3">
-                    <label for="keywords" class="form-label fw-semibold">
+                  <div className="mb-3">
+                    <label for="keywords" className="form-label fw-semibold">
                       Keywords
                     </label>
                     <select
                       id="keyword-select"
                       required
-                      class="form-select"
+                      className="form-select"
                       value={Keywords[Keywords.length - 1]}
                       onChange={(event) => {
                         if (!Keywords.includes(event.target.value)) {
@@ -244,12 +244,12 @@ function EditPost() {
                     <div className="d-flex flex-row mt-2 gap-1">
                       {Keywords.map((key, index) => (
                         <p
-                          class="border-primary border fs-6 py-0 px-2 rounded-4 text-primary"
+                          className="border-primary border fs-6 py-0 px-2 rounded-4 text-primary"
                           key={index}
                         >
                           {key}&nbsp;
                           <i
-                            class="bi bi-x fw-bold"
+                            className="bi bi-x fw-bold"
                             style={{ cursor: "pointer" }}
                             onClick={() => {
                               let remove = [...Keywords];
@@ -261,8 +261,8 @@ function EditPost() {
                       ))}
                     </div>
                   </div>
-                  <div class="mb-3">
-                    <label for="keywords" class="form-label fw-semibold">
+                  <div className="mb-3">
+                    <label for="keywords" className="form-label fw-semibold">
                       Content of Blog
                     </label>
                     <textarea
@@ -277,7 +277,7 @@ function EditPost() {
                     />
                   </div>
                   <div className="d-flex flex-row justify-content-center align-items-center gap-3">
-                    <div class="mb-3">
+                    <div className="mb-3">
                       <button
                         className="btn btn-primary px-5 fw-semibold"
                         type="button"
@@ -286,22 +286,23 @@ function EditPost() {
                         Cancel
                       </button>
                     </div>
-                    <div class="mb-3">
+                    <div className="mb-3">
                       <button
                         className="btn btn-warning px-5 fw-semibold"
                         type="submit"
                       >
-                        Update &nbsp;<i class="bi bi-cloud-arrow-up-fill"></i>
+                        Update &nbsp;
+                        <i className="bi bi-cloud-arrow-up-fill"></i>
                       </button>
                     </div>
                   </div>
                 </form>
               </div>
 
-              <div class="col-md-4">
+              <div className="col-md-4">
                 <img
                   src={Image && Image}
-                  class="img-fluid rounded-start"
+                  className="img-fluid rounded-start"
                   alt="Poster Image"
                 />
               </div>

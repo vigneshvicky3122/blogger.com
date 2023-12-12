@@ -10,17 +10,14 @@ import CreatePost from "./Components/CreatePost";
 import Account from "./Components/Account";
 import EditPost from "./Components/EditPost";
 import Category from "./Components/Category";
-// import EditProfile from "./Components/EditProfile";
 import UserAccount from "./Components/UserAccount";
 
 export const url = import.meta.env.VITE_BACKEND_URL;
-// import { Provider } from "react-redux";
-// import store from "./Redux/Store";
+
 function App() {
   return (
     <>
       <BrowserRouter>
-        {/* <Provider store={store}> */}
         <Routes>
           <Route path="*" element={<Navigate to="/dashboard" />} />
           <Route path="dashboard" element={<Dashboard />} />
@@ -35,10 +32,7 @@ function App() {
           <Route path="edit/blog/:id" element={<EditPost />} />
           <Route path="blog/category/:id" element={<Category />} />
           <Route path="user/:username" element={<UserAccount />} />
-          {/* <Route path="edit_profile" element={<EditProfile />} />
-           */}
         </Routes>
-        {/* </Provider> */}
       </BrowserRouter>
     </>
   );

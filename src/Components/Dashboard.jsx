@@ -4,29 +4,36 @@ import Card from "./Card";
 
 function Dashboard() {
   const [Search, setSearch] = useState("");
+  const [isDate, setDate] = useState("");
+
   return (
     <>
       <Navbar />
-      <div className="container w-50">
-        <div class="mb-1">
+      <div className="container d-flex w-50 my-5">
+        <div className="input-group">
           <input
             type="search"
-            class="form-control rounded-4"
+            className="form-control rounded-start-4"
             id="exampleFormControlInput1"
             placeholder="Search by keywords"
             onChange={(event) => setSearch(event.target.value)}
-            onBlur={() => setSearch("")}
             value={Search}
           />
         </div>
-      </div>
-      <div className="container w-25">
-        <div class="input-group mb-5">
-          <input type="datetime-local" class="form-control" />
-          <input type="month" class="form-control" />
+        <div className="input-group">
+          <input
+            type="month"
+            min="2023-01"
+            max="2024-02"
+            className="form-control rounded-end-4"
+            placeholder="By Month"
+            onChange={(event) => setDate(event.target.value)}
+            value={isDate}
+          />
         </div>
       </div>
-      <Card Search={Search} />
+
+      <Card Search={Search} isDate={isDate} />
     </>
   );
 }

@@ -38,25 +38,26 @@ function Category() {
   }
   return (
     <>
-    <Navbar/>
-      <div class="container">
-        <h3 class="m-3 mt-5 fw-bold">{params.id}</h3>
-        <div class="row row-cols-1 row-cols-md-3 g-4 m-5">
+      <Navbar />
+      <div className="container">
+        <h3 className="m-3 mt-5 fw-bold">{params.id}</h3>
+        <div className="row row-cols-1 row-cols-md-3 g-4 m-5">
           {Post &&
             Post.filter((fill) =>
               fill.Category.toLowerCase().includes(params.id.toLowerCase())
             ).map((items, index) => (
-              <div class="col" key={index}>
-                <div class="card h-100">
-                  <img
-                    src={items.Image}
-                    class="card-img-top img-thumbnail"
-                    alt="Blog-img"
-                    onClick={() => navigate(`/blog/${items._id}`)}
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">{items.Tittle}</h5>
-                    <p class="card-text para-overflow">{items.Content}</p>
+              <div className="col" key={index}>
+                <div className="card h-100">
+                  <a href={`/blog/${items._id}`}>
+                    <img
+                      src={items.Image}
+                      className="card-img-top img-thumbnail"
+                      alt="Blog-img"
+                    />
+                  </a>
+                  <div className="card-body">
+                    <h5 className="card-title">{items.Tittle}</h5>
+                    <p className="card-text para-overflow">{items.Content}</p>
                   </div>
                   <div className="d-flex flex-row ms-2 mb-3">
                     <p className="text-primary border border-primary fw-semibold fs-6 py-0 px-2 rounded-4">
@@ -64,13 +65,15 @@ function Category() {
                     </p>
                   </div>
                   <div className="d-flex flex-row align-items-center gap-2 p-2">
-                    <img
-                      src={items.Author.profilePic}
-                      class="rounded-circle"
-                      alt="user-profile"
-                      width={"25px"}
-                      height={"25px"}
-                    />
+                    <a href={`/user/${items.Author.username}`}>
+                      <img
+                        src={items.Author.profilePic}
+                        className="rounded-circle"
+                        alt="user-profile"
+                        width={"25px"}
+                        height={"25px"}
+                      />
+                    </a>
                     <a
                       href={`/user/${items.Author.username}`}
                       className="nav-link fw-semibold"
@@ -78,8 +81,8 @@ function Category() {
                       {items.Author.username}
                     </a>
                   </div>
-                  <div class="card-footer">
-                    <small class="text-body-secondary">
+                  <div className="card-footer">
+                    <small className="text-body-secondary">
                       {moment(items.CreatedAt).fromNow()}
                     </small>
                   </div>
