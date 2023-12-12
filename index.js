@@ -61,34 +61,6 @@ app.get("/dashboard", authentication, async (req, res) => {
     Client.close();
   }
 });
-// app.get("/edit_profile/:id", authentication, async (req, res) => {
-//   await Client.connect();
-//   try {
-//     const Db = Client.db(process.env.DB_NAME);
-//     let user = await Db.collection(process.env.DB_COLLECTION_ONE)
-//       .find({ username: req.params.id })
-//       .toArray();
-//     if (user) {
-//       res.json({
-//         statusCode: 200,
-//         user,
-//       });
-//     } else {
-//       res.json({
-//         statusCode: 401,
-//         message: "couldn't connect",
-//       });
-//     }
-//   } catch (error) {
-//     console.log(error);
-//     res.json({
-//       statusCode: 500,
-//       message: "internal server error",
-//     });
-//   } finally {
-//     await Client.close();
-//   }
-// });
 app.get("/user/:username", async (req, res) => {
   await Client.connect();
   try {
@@ -418,7 +390,7 @@ app.put("/like/:id", authentication, async (req, res) => {
     let like = await Db.collection(
       process.env.DB_COLLECTION_TWO
     ).findOneAndUpdate(
-      { _id: ObjectId(req.params.id) },
+      { _id: new ObjectId(req.params.id) },
       { $push: { Likes: req.body.likedBy } }
     );
     if (like) {
@@ -449,7 +421,7 @@ app.put("/unLike/:id", authentication, async (req, res) => {
     let unlike = await Db.collection(
       process.env.DB_COLLECTION_TWO
     ).findOneAndUpdate(
-      { _id: ObjectId(req.params.id) },
+      { _id: new ObjectId(req.params.id) },
       { $pull: { Likes: req.body.likedBy } }
     );
     if (unlike) {
@@ -480,7 +452,7 @@ app.post("/comments/:id", authentication, async (req, res) => {
     let comments = await Db.collection(
       process.env.DB_COLLECTION_TWO
     ).findOneAndUpdate(
-      { _id: ObjectId(req.params.id) },
+      { _id: new ObjectId(req.params.id) },
       { $push: { Comments: req.body } }
     );
     if (comments) {
@@ -491,85 +463,7 @@ app.post("/comments/:id", authentication, async (req, res) => {
     } else {
       res.json({
         statusCode: 401,
-        message: "upload failed",
-      });
-    }
-  } catch (error) {
-    console.log(error);
-    res.json({
-      statusCode: 500,
-      message: "internal server error",
-    });
-  } finally {
-    await Client.close();
-  }
-});
-app.put("/follow/:id", authentication, async (req, res) => {
-  await Client.connect();
-
-  try {
-    const Db = Client.db(process.env.DB_NAME);
-    let following = await Db.collection(
-      process.env.DB_COLLECTION_ONE
-    ).findOneAndUpdate(
-      { username: req.params.id },
-      { $push: { Following: req.body.followingTo } }
-    );
-    let followers = await Db.collection(
-      process.env.DB_COLLECTION_ONE
-    ).findOneAndUpdate(
-      { username: req.body.followingTo },
-      { $push: { Followers: req.params.id } }
-    );
-    if (followers && following) {
-      res.json({
-        statusCode: 200,
-        message: `you following that user ${req.body.followingTo}`,
-      });
-    } else {
-      res.json({
-        statusCode: 401,
-        message: "upload failed",
-      });
-    }
-  } catch (error) {
-    console.log(error);
-    res.json({
-      statusCode: 500,
-      message: "internal server error",
-    });
-  } finally {
-    await Client.close();
-  }
-});
-app.put("/unfollow/:id", authentication, async (req, res) => {
-  await Client.connect();
-
-  try {
-    const Db = Client.db(process.env.DB_NAME);
-    let unfollow = await Db.collection(
-      process.env.DB_COLLECTION_ONE
-    ).findOneAndUpdate(
-      { username: req.params.id },
-      { $pull: { Following: req.body.followingTo } }
-    );
-
-    let followers = await Db.collection(
-      process.env.DB_COLLECTION_ONE
-    ).updateOne(
-      { username: req.body.followingTo },
-      { $pull: { Followers: req.params.id } }
-    );
-
-    if (followers && unfollow) {
-      res.json({
-        statusCode: 200,
-        message: `you unfollow that user ${req.body.followingTo}`,
-      });
-    } else {
-      res.json({
-        statusCode: 401,
-        message: "upload failed",
+        message: "Failed...",
       });
     }
   } catch (error) {
@@ -819,7 +713,7 @@ app.delete("/delete-post/:id", authentication, async (req, res) => {
     const Db = Client.db(process.env.DB_NAME);
     let deleteOne = await Db.collection(
       process.env.DB_COLLECTION_TWO
-    ).deleteOne({ _id: ObjectId(req.params.id) });
+    ).deleteOne({ _id: new ObjectId(req.params.id) });
     if (deleteOne) {
       res.json({
         statusCode: 200,
